@@ -15,6 +15,7 @@
     <link href="{{asset('frontend/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('frontend/css/style.default.css')}}" rel="stylesheet" id="theme-stylesheet')">
     <link href="{{asset('frontend/css/custom.css')}}" rel="stylesheet">
+    @yield('css')
 </head>
 
 <body>
@@ -62,6 +63,7 @@
     <script src="{{asset('frontend/js/jquery.counterup.min.js')}}"></script>
     <script src="{{asset('frontend/js/jquery.parallax-1.1.3.js')}}"></script>
     <script src="{{asset('frontend/js/front.js')}}"></script>
+    @yield('js')
 </body>
 
 </html>

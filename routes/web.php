@@ -33,7 +33,7 @@ Route::get('/redirecting', function(){
     }
 });
 
-Route::get('register', 'RegisterController@formRegister');
+Route::get('register', 'RegisterController@register');
 Route::post('register','RegisterController@proccessRegister');
 
 
