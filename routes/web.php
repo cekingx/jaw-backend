@@ -10,13 +10,43 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.produk');
 });
 
-// Auth::routes();
+Route::get('/login', function(){
+  return view('frontend.login');
+});
 
-Route::get('produk', function() {
-    return view('product');
+Route::get('/home', function(){
+    return redirect('/redirecting');
+});
+
+Route::get('/redirecting', function(){
+    if(Auth::user()->role == 'admin'){
+        return redirect('admin');
+    }
+    elseif(Auth::user()->role == 'user'){
+        return redirect('user');
+    }
+});
+
+Route::get('register', 'RegisterController@formRegister');
+Route::post('register','RegisterController@proccessRegister');
+
+
+Route::group(['middleware' => 'role:user', 'prefix' => 'user', 'namespace' => 'User'], function(){
+    Route::get('/', function(){
+        return redirect('user/home');
+    });
+    Route::get('home', 'HomeController@index');
+});
+
+Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'namespace' => 'Admin'], function(){
+    Route::get('/', function(){
+        return redirect('admin/dashboard');
+    });
+    Route::get('dashboard', 'DashboardController@index');
 });
